@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int val;
+    struct node *next;
+};
+
+struct node *front, *rear;
+
+void insert();
+void delete();
+void display();
+
+int main()
+{
+    int choice;
+    printf("\n<-*-*-*-*-*-*-* QUEUE PLAYGROUND *-*-*-*-*-*-*-*->\n\n");
+    while(choice != 4)
+    {
+        printf("Choose One of the following...\n");
+        printf("1. Add the element\n");
+        printf("2. Delete the element\n");
+        printf("3. Display the Elements\n");
+        printf("4. Exit..\n\n");
+        printf("Enter Your Response : ");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1 : insert();
+                     break;
+            case 2 : delete();
+                     break;
+            case 3 : printf("\n\n");
+                     display();
+                     printf("\n\n");
+                     break;
+            case 4 : printf("Exited\n");
+                     break;
+            default: printf("Enter the valid option\n");
+        }
+    }
+}
+
+void insert()
+{
+    struct node *new;
+    new = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the value of the node : ");
+    scanf("%d", &new->val);
+    if(front == NULL)
+    {
+        front = new;
+        front->next = NULL;
+        rear = new;
+        rear->next = NULL;
+    } else {
+        rear->next = new;
+        rear = new;
+        rear->next = NULL;
+    }
+}
+
+void delete()
+{
+    front = front->next;
+}
+
+void display()
+{
+    struct node *temp;
+    temp = front;
+    printf("|");
+    while(temp != NULL)
+    {
+        printf(" %d |", temp->val);
+        temp = temp->next;
+    }
+}

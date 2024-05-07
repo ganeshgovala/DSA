@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+} *head = NULL, *temp;
+
+void delete_at_beginning();
+void delete_at_end();
+void delete_at_specific_pos();
+void display();
+
+int main()
+{
+    int choice;
+    printf("---------------------------------------\n");
+    printf("\tLinked List Playground\n");
+    printf("---------------------------------------\n");
+
+    while (choice != 5)
+    {
+        printf("Enter one of the following : \n");
+        printf("1. Delete at Beginning\n");
+        printf("2. Delete at End\n");
+        printf("3. Delete at specific position\n");
+        printf("4. Display\n");
+        printf("5. Exit\n");
+        printf("Enter your response : ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            delete_at_beginning();
+            break;
+        case 2:
+            delete_at_end();
+            break;
+        case 3:
+            delete_at_specific_pos();
+            break;
+        case 4:
+            display();
+            break;
+        default:
+            printf("Enter valid response\n");
+        }
+    }
+}
+
+void delete_at_beginning()
+{
+    if (head == NULL)
+    {
+        printf("There are no elements to delete\n");
+    }
+    else
+    {
+        temp = head;
+        head = temp->next;
+        temp->next = NULL;
+    }
+}
+
+void delete_at_end()
+{
+    if (head == NULL)
+    {
+        printf("There are no elements to delete\n");
+    }
+    else
+    {
+        temp = head;
+        while (temp->next->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = NULL;
+    }
+}
+
+void delete_at_specific_pos()
+{
+    int pos;
+    int count = 1;
+    struct node *prev;
+    prev = head;
+    printf("Enter the position : ");
+    scanf("%d", &pos);
+    while(count<pos-1)
+    {
+        prev = prev->next;
+        count++;
+    }
+    temp = prev->next->next;
+    prev->next = temp;
+}
+
+void display()
+{
+    temp = head;
+    printf("*******************\n");
+    while (temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n*******************\n");
+}

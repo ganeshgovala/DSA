@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+} *head = NULL, *temp;
+
+void insert_at_beginning();
+void insert_at_end();
+void insert_at_specific_pos();
+void display();
+
+int main()
+{
+    int choice;
+    printf("---------------------------------------\n");
+    printf("\tLinked List Playground\n");
+    printf("---------------------------------------\n");
+
+    while (choice != 5)
+    {
+        printf("Enter one of the following : \n");
+        printf("1. Insert at Beginning\n");
+        printf("2. Insert at End\n");
+        printf("3. Insert at specific position\n");
+        printf("4. Display\n");
+        printf("5. Exit\n");
+        printf("Enter your response : ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            insert_at_beginning();
+            break;
+        case 2:
+            insert_at_end();
+            break;
+        case 3:
+            insert_at_specific_pos();
+            break;
+        case 4:
+            display();
+            break;
+        default:
+            printf("Enter valid response\n");
+        }
+    }
+}
+
+void insert_at_beginning()
+{
+    struct node *new;
+    new = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the value of the node : ");
+    scanf("%d", &new->data);
+    if (head == NULL)
+    {
+        head = new;
+        temp = new;
+        temp->next = NULL;
+    }
+    else
+    {
+        temp = new;
+        temp->next = head;
+        head = new;
+    }
+}
+
+void insert_at_end()
+{
+    temp = head;
+    struct node *new;
+    new = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the value of the node : ");
+    scanf("%d", &new->data);
+    if(head == NULL)
+    {
+        head = new;
+        head->next != NULL;
+    } else {
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = new;
+        temp = new;
+        temp->next = NULL;
+    }
+}
+
+void insert_at_specific_pos()
+{
+    int pos;
+    int count = 1;
+    struct node *new, *prev;
+    new = (struct node *)malloc(sizeof(struct node));
+    prev = head;
+    printf("Enter the position : ");
+    scanf("%d", &pos);
+    printf("Enter the value of the node : ");
+    scanf("%d", &new->data);
+    while(count<pos - 1)
+    {
+        prev = prev->next;
+        count++;
+    }
+    temp = prev->next;
+    prev->next = new;
+    prev = new;
+    prev->next = temp;
+}
+
+void display()
+{
+    temp = head;
+    printf("*******************\n");
+    while (temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n*******************\n");
+}
